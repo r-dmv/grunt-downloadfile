@@ -7,6 +7,7 @@
  */
 var sys = require("sys"),
     http = require("http"),
+    https = require("https"),
     url = require("url"),
     path = require("path"),
     fs = require("fs");
@@ -151,8 +152,8 @@ module.exports = function(grunt) {
       if (fs.existsSync(file.tmpPath)) {
         fs.unlinkSync(file.tmpPath);
       }
-
-      return http.request(file, function (response) {
+      var proto = url.parse(file.url).protocol === "http:" ? http : https;
+      return proto.request(file, function (response) {
         chunkedResponse(file, response);
       });
     };
