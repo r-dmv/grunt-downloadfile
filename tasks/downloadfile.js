@@ -132,7 +132,7 @@ module.exports = function(grunt) {
 
     var createRequest = function(file) {
       file['host'] = url.parse(file.url).hostname;
-      file['path'] = url.parse(file.url).pathname;
+      file['path'] = url.parse(file.url).path;
 
       if (file.overwrite == undefined) {
         file.overwrite = false;
